@@ -131,14 +131,18 @@ body {
     box-shadow: 0 4px 10px rgba(230, 57, 70, 0.25);
 }
 
-/* Products Grid */
+/* Products Grid & Container */
 .menu-container {
     max-width: 1100px;
     margin: 10px auto;
-    padding: 0 20px;
+    padding: 0 12px;
+}
+
+/* شبكة المنتجات للكمبيوتر */
+#menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
 }
 
 .product-card {
@@ -157,7 +161,7 @@ body {
 }
 
 .product-img-wrapper {
-    height: 170px;
+    height: 140px;
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -171,58 +175,75 @@ body {
 }
 
 .product-info {
-    padding: 15px;
+    padding: 10px 12px 12px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     flex-grow: 1;
 }
 
 .product-title {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 .product-desc {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
-    line-height: 1.4;
+    line-height: 1.3;
 }
 
 /* Options (Sizes / Stuffed Crust) */
 .options-group {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.82rem;
-    margin-top: 4px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.78rem;
+    margin-top: 2px;
+}
+
+.options-group label {
+    font-weight: 600;
+    color: var(--text-color);
 }
 
 .options-group select {
-    padding: 4px 8px;
+    width: 100%;
+    padding: 4px 6px;
     border-radius: 6px;
     border: 1px solid var(--border-color);
     font-family: inherit;
+    font-size: 0.75rem;
+    background-color: #fff;
+}
+
+.crust-opt {
+    margin-top: 2px;
 }
 
 .crust-opt label {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     color: var(--primary-hover);
     font-weight: bold;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 .product-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
-    padding-top: 10px;
+    margin-top: 8px;
+    padding-top: 8px;
     border-top: 1px dashed var(--border-color);
 }
 
 .product-price {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 800;
     color: var(--primary-color);
 }
@@ -231,16 +252,83 @@ body {
     background: #ffebee;
     color: var(--primary-color);
     border: none;
-    padding: 8px 14px;
+    padding: 6px 12px;
     border-radius: 20px;
     font-weight: 700;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: 0.2s;
+    white-space: nowrap;
 }
 
 .add-btn:hover {
     background: var(--primary-color);
     color: white;
+}
+
+/* تنسيق وصف الوجبة الحصري لقسم الوجبات */
+.meal-description {
+    font-size: 0.75rem;
+    color: #555;
+    margin: 2px 0 4px 0;
+    line-height: 1.3;
+    background-color: #f9f9f9;
+    padding: 4px 6px;
+    border-radius: 4px;
+    border-right: 3px solid #ff6b6b;
+}
+
+/* -------------------------------------------------------------
+   تخصيص الشاشة للموبايل (عرض صنفين جنب بعض زي الصورة الأولى)
+---------------------------------------------------------------- */
+@media (max-width: 600px) {
+    .menu-container {
+        padding: 0 8px;
+    }
+
+    #menu-grid {
+        grid-template-columns: repeat(2, 1fr); /* صنفين جنب بعض */
+        gap: 10px;
+    }
+
+    .product-img-wrapper {
+        height: 120px; /* ارتفاع أنسب للصورة المزدوجة */
+    }
+
+    .product-info {
+        padding: 8px 10px 10px;
+    }
+
+    .product-title {
+        font-size: 0.88rem;
+    }
+
+    .options-group select {
+        padding: 3px 4px;
+        font-size: 0.72rem;
+    }
+
+    .crust-opt label {
+        font-size: 0.68rem;
+    }
+
+    .product-bottom {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .product-price {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .add-btn {
+        width: 100%;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 0.78rem;
+    }
 }
 
 /* Cart Drawer & Overlay */
@@ -443,16 +531,4 @@ body {
 
 .send-whatsapp-btn:hover {
     background: #1eb857;
-}
-
-/* تنسيق وصف الوجبة الحصري لقسم الوجبات */
-.meal-description {
-    font-size: 0.85rem;
-    color: #666;
-    margin: 4px 0 8px 0;
-    line-height: 1.4;
-    background-color: #f9f9f9;
-    padding: 4px 8px;
-    border-radius: 4px;
-    border-right: 3px solid #ff6b6b;
 }
