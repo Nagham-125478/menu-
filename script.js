@@ -15,7 +15,7 @@ const menuItems = [
             { name: "عائلي", price: 8.00 }
         ],
         hasStuffedCrustOption: true,
-        image: " https://kitchen.sayidaty.net/uploads/small/11/1105018e9f1f137d2dfebf7ad64c7f3a_w750_h500.jpg"
+        image: "https://kitchen.sayidaty.net/uploads/small/11/1105018e9f1f137d2dfebf7ad64c7f3a_w750_h500.jpg"
     },
     {
         id: 2,
@@ -218,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // عرض المنتجات
 function renderMenu(items) {
     const menuGrid = document.getElementById("menu-grid");
+    if (!menuGrid) return;
     menuGrid.innerHTML = "";
 
     items.forEach(item => {
@@ -238,17 +239,20 @@ function renderMenu(items) {
             }
         }
 
-        // إظهار الوصف فقط وفقط لوجبات قسم الوجبات (meals)
+        // إظهار الوصف فقط لوجبات قسم الوجبات (meals)
         const descriptionHTML = (item.category === "meals" && item.description) 
             ? `<p class="meal-description">${item.description}</p>` 
             : "";
 
         const initialPrice = item.sizes ? item.sizes[0].price : item.price;
-        const defaultImg = item.image;
+        
+        // تنظيف رابط الصورة تلقائياً لتجنب التعليق
+        const cleanImg = item.image ? item.image.trim() : "";
+        const defaultImg = cleanImg || "https://via.placeholder.com/300x200?text=لا+توجد+صورة";
 
         card.innerHTML = `
             <div class="product-img-wrapper">
-                <img src="${defaultImg}" id="img-display-${item.id}" alt="${item.title}" class="product-img">
+                <img src="${defaultImg}" id="img-display-${item.id}" alt="${item.title}" class="product-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=صورة+غير+متوفرة'">
             </div>
             <div class="product-info">
                 <h3 class="product-title">${item.title}</h3>
@@ -271,7 +275,10 @@ function updatePizzaPrice(id) {
     const item = menuItems.find(p => p.id === id);
     if (!item || !item.sizes) return;
 
-    const sizeIndex = document.getElementById(`size-${id}`).value;
+    const sizeSelect = document.getElementById(`size-${id}`);
+    if (!sizeSelect) return;
+
+    const sizeIndex = sizeSelect.value;
     let price = item.sizes[sizeIndex].price;
 
     const stuffedCheckbox = document.getElementById(`stuffed-${id}`);
@@ -279,13 +286,16 @@ function updatePizzaPrice(id) {
         price += 1.00;
     }
 
-    document.getElementById(`price-display-${id}`).innerText = `${price.toFixed(2)} د.أ`;
+    const priceDisplay = document.getElementById(`price-display-${id}`);
+    if (priceDisplay) {
+        priceDisplay.innerText = `${price.toFixed(2)} د.أ`;
+    }
 }
 
 // تصفية الأقسام
 function filterCategory(category, button) {
     document.querySelectorAll(".cat-btn").forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
+    if (button) button.classList.add("active");
 
     if (category === "all") {
         renderMenu(menuItems);
@@ -297,17 +307,22 @@ function filterCategory(category, button) {
 
 // التحكم بالسلة
 function toggleCart() {
-    document.getElementById("cart-drawer").classList.toggle("active");
-    document.getElementById("cart-overlay").classList.toggle("active");
+    const drawer = document.getElementById("cart-drawer");
+    const overlay = document.getElementById("cart-overlay");
+    if (drawer) drawer.classList.toggle("active");
+    if (overlay) overlay.classList.toggle("active");
 }
 
 function addToCart(id) {
     const product = menuItems.find(p => p.id === id);
+    if (!product) return;
+
     let selectedTitle = product.title;
     let itemPrice = product.price;
 
     if (product.sizes) {
-        const sizeIndex = document.getElementById(`size-${id}`).value;
+        const sizeSelect = document.getElementById(`size-${id}`);
+        const sizeIndex = sizeSelect ? sizeSelect.value : 0;
         const selectedSize = product.sizes[sizeIndex];
         itemPrice = selectedSize.price;
         selectedTitle += ` (${selectedSize.name})`;
@@ -353,6 +368,8 @@ function updateCartUI() {
     const cartBadge = document.getElementById("cart-badge");
     const cartTotal = document.getElementById("cart-total-price");
 
+    if (!cartContainer) return;
+
     cartContainer.innerHTML = "";
     let total = 0;
     let totalCount = 0;
@@ -378,15 +395,17 @@ function updateCartUI() {
         cartContainer.appendChild(itemElement);
     });
 
-    cartBadge.innerText = totalCount;
-    cartTotal.innerText = `${total.toFixed(2)} د.أ`;
+    if (cartBadge) cartBadge.innerText = totalCount;
+    if (cartTotal) cartTotal.innerText = `${total.toFixed(2)} د.أ`;
 }
 
 // التحكم بخيار كليك
 function toggleCliqDetails() {
-    const cliqSelected = document.querySelector('input[name="payment_method"]:checked').value.includes("كليك");
+    const cliqRadio = document.querySelector('input[name="payment_method"]:checked');
     const cliqBox = document.getElementById("cliq-details");
-    if (cliqSelected) {
+    if (!cliqBox || !cliqRadio) return;
+
+    if (cliqRadio.value.includes("كليك")) {
         cliqBox.classList.remove("hidden");
     } else {
         cliqBox.classList.add("hidden");
@@ -395,7 +414,10 @@ function toggleCliqDetails() {
 
 // نسخ رقم CliQ
 function copyCliqNumber() {
-    const cliqNum = document.getElementById("cliq-number").innerText;
+    const cliqElem = document.getElementById("cliq-number");
+    if (!cliqElem) return;
+    const cliqNum = cliqElem.innerText;
+    
     navigator.clipboard.writeText(cliqNum).then(() => {
         alert("تم نسخ رقم CliQ بنجاح: " + cliqNum);
     }).catch(err => {
@@ -410,9 +432,12 @@ function sendOrderToWhatsApp() {
         return;
     }
 
-    const selectedPayment = document.querySelector('input[name="payment_method"]:checked').value;
+    const paymentInput = document.querySelector('input[name="payment_method"]:checked');
+    const selectedPayment = paymentInput ? paymentInput.value : "نقداً عند الاستلام";
     const isCliq = selectedPayment.includes("كليك");
-    const notes = document.getElementById("order-notes").value.trim();
+    
+    const notesElem = document.getElementById("order-notes");
+    const notes = notesElem ? notesElem.value.trim() : "";
     let total = 0;
 
     let message = `*طلب جديد - بيتزا ومعجنات حي الزهور* 🍕\n\n`;
