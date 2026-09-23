@@ -7,8 +7,8 @@
     --text-color: #2b2d42;
     --text-muted: #6c757d;
     --border-color: #e9ecef;
-    --shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-    --radius: 16px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius: 12px;
 }
 
 * {
@@ -27,7 +27,7 @@ body {
 /* Header */
 .main-header {
     background-color: var(--card-bg);
-    padding: 16px 20px;
+    padding: 12px 16px;
     box-shadow: var(--shadow);
     position: sticky;
     top: 0;
@@ -45,21 +45,21 @@ body {
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .logo-icon {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
 }
 
 .logo-area h1 {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 800;
 }
 
 .logo-area p {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
 }
 
@@ -67,17 +67,12 @@ body {
     background: #ffebee;
     color: var(--primary-color);
     border: none;
-    padding: 10px 16px;
+    padding: 8px 14px;
     border-radius: 30px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     position: relative;
     transition: 0.2s;
-}
-
-.cart-btn-header:hover {
-    background: var(--primary-color);
-    color: #fff;
 }
 
 .badge {
@@ -86,10 +81,10 @@ body {
     left: -5px;
     background: var(--primary-color);
     color: white;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: bold;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -100,8 +95,8 @@ body {
 /* Navigation Categories */
 .categories-nav {
     display: flex;
-    gap: 10px;
-    padding: 15px 20px;
+    gap: 8px;
+    padding: 12px;
     overflow-x: auto;
     max-width: 1100px;
     margin: 0 auto;
@@ -115,10 +110,11 @@ body {
 .cat-btn {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: 10px 20px;
-    border-radius: 25px;
+    padding: 8px 16px;
+    border-radius: 20px;
     white-space: nowrap;
     font-weight: 600;
+    font-size: 0.88rem;
     color: var(--text-muted);
     cursor: pointer;
     transition: 0.3s;
@@ -128,21 +124,20 @@ body {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
-    box-shadow: 0 4px 10px rgba(230, 57, 70, 0.25);
 }
 
-/* Products Grid & Container */
+/* Products Grid & Container - شبكة صنفين جنب بعض دائماً */
 .menu-container {
+    width: 100%;
     max-width: 1100px;
     margin: 10px auto;
-    padding: 0 12px;
+    padding: 0 8px;
 }
 
-/* شبكة المنتجات للكمبيوتر */
 #menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 15px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* جبر الشبكة على عمودين مثل الصورة */
+    gap: 8px !important;
 }
 
 .product-card {
@@ -153,15 +148,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.2s;
-}
-
-.product-card:hover {
-    transform: translateY(-4px);
+    width: 100%;
 }
 
 .product-img-wrapper {
-    height: 140px;
+    height: 125px;
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -175,48 +166,52 @@ body {
 }
 
 .product-info {
-    padding: 10px 12px 12px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
     flex-grow: 1;
+    text-align: center;
 }
 
 .product-title {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 700;
     line-height: 1.2;
+    margin-bottom: 2px;
 }
 
 .product-desc {
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 /* Options (Sizes / Stuffed Crust) */
 .options-group {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    font-size: 0.78rem;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.72rem;
     margin-top: 2px;
 }
 
 .options-group label {
     font-weight: 600;
+    font-size: 0.72rem;
     color: var(--text-color);
 }
 
 .options-group select {
     width: 100%;
-    padding: 4px 6px;
+    padding: 3px 4px;
     border-radius: 6px;
     border: 1px solid var(--border-color);
     font-family: inherit;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     background-color: #fff;
+    text-align: center;
 }
 
 .crust-opt {
@@ -224,110 +219,88 @@ body {
 }
 
 .crust-opt label {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     color: var(--primary-hover);
     font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 3px;
 }
 
 .product-bottom {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    margin-top: 8px;
-    padding-top: 8px;
+    gap: 6px;
+    margin-top: 6px;
+    padding-top: 6px;
     border-top: 1px dashed var(--border-color);
 }
 
 .product-price {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 800;
     color: var(--primary-color);
 }
 
 .add-btn {
-    background: #ffebee;
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
     border: none;
-    padding: 6px 12px;
-    border-radius: 20px;
+    padding: 6px 0;
+    width: 100%;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 0.8rem;
     cursor: pointer;
     transition: 0.2s;
-    white-space: nowrap;
+    text-align: center;
 }
 
 .add-btn:hover {
-    background: var(--primary-color);
-    color: white;
+    background: var(--primary-hover);
 }
 
-/* تنسيق وصف الوجبة الحصري لقسم الوجبات */
+/* وصف الوجبات */
 .meal-description {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #555;
-    margin: 2px 0 4px 0;
-    line-height: 1.3;
+    margin: 2px 0;
+    line-height: 1.2;
     background-color: #f9f9f9;
-    padding: 4px 6px;
+    padding: 3px 4px;
     border-radius: 4px;
-    border-right: 3px solid #ff6b6b;
+    border-right: 2px solid #ff6b6b;
+    text-align: right;
 }
 
-/* -------------------------------------------------------------
-   تخصيص الشاشة للموبايل (عرض صنفين جنب بعض زي الصورة الأولى)
----------------------------------------------------------------- */
-@media (max-width: 600px) {
-    .menu-container {
-        padding: 0 8px;
-    }
-
+/* الشاشات اللوحية والكمبيوتر (تصبح 3 أو 4 أعمدة للشاشات العريضة فقط) */
+@media (min-width: 768px) {
     #menu-grid {
-        grid-template-columns: repeat(2, 1fr); /* صنفين جنب بعض */
-        gap: 10px;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px !important;
     }
-
     .product-img-wrapper {
-        height: 120px; /* ارتفاع أنسب للصورة المزدوجة */
+        height: 160px;
     }
-
-    .product-info {
-        padding: 8px 10px 10px;
-    }
-
     .product-title {
-        font-size: 0.88rem;
+        font-size: 1rem;
     }
-
-    .options-group select {
-        padding: 3px 4px;
-        font-size: 0.72rem;
-    }
-
-    .crust-opt label {
-        font-size: 0.68rem;
-    }
-
     .product-bottom {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
+        flex-direction: row;
+        justify-content: space-between;
     }
-
-    .product-price {
-        font-size: 0.9rem;
-        text-align: center;
-    }
-
     .add-btn {
-        width: 100%;
-        text-align: center;
-        padding: 6px 0;
-        font-size: 0.78rem;
+        width: auto;
+        padding: 6px 14px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #menu-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
     }
 }
 
@@ -371,7 +344,7 @@ body {
 }
 
 .cart-header {
-    padding: 20px;
+    padding: 16px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
@@ -389,10 +362,10 @@ body {
 .cart-items {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .cart-item {
@@ -400,16 +373,16 @@ body {
     justify-content: space-between;
     align-items: center;
     background: var(--bg-color);
-    padding: 12px;
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .item-details h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .item-details p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--primary-color);
     font-weight: 700;
 }
@@ -417,12 +390,12 @@ body {
 .qty-controls {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .qty-btn {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     border: 1px solid var(--border-color);
     background: white;
@@ -432,28 +405,28 @@ body {
 
 /* Cart Footer */
 .cart-footer {
-    padding: 20px;
+    padding: 16px;
     border-top: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .total-row {
     display: flex;
     justify-content: space-between;
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .payment-section {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .section-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
 }
 
@@ -463,7 +436,7 @@ body {
 }
 
 .pay-option {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -473,12 +446,12 @@ body {
 .cliq-box {
     background: #eef9ff;
     border: 1px solid #74c0fc;
-    padding: 10px 12px;
-    border-radius: 10px;
-    font-size: 0.82rem;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 }
 
 .cliq-box.hidden {
@@ -495,22 +468,19 @@ body {
     background: #007bff;
     color: white;
     border: none;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
 }
 
 .notes-section textarea {
     width: 100%;
-    height: 55px;
+    height: 50px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 8px;
-    font-size: 0.85rem;
+    padding: 6px;
+    font-size: 0.8rem;
     resize: none;
 }
 
@@ -518,15 +488,15 @@ body {
     background: #25d366;
     color: white;
     border: none;
-    padding: 12px;
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 10px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .send-whatsapp-btn:hover {
